@@ -10,9 +10,19 @@ import numpy as np
 from typing import List, Tuple
 import logging
 from fastai.vision.all import *
+import sys
+import pathlib
 import torch
 import time
+from PIL import Image
 from collections import Counter
+
+# Patch PosixPath for Windows compatibility
+if sys.platform == "win32":
+    class PosixPath(pathlib.WindowsPath):
+        def __new__(cls, *args, **kwargs):
+            return pathlib.WindowsPath(*args, **kwargs)
+    pathlib.PosixPath = PosixPath
 
 
 logging.basicConfig(level=logging.INFO)
@@ -167,6 +177,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Yoga Pose Detection and Routine API"}
 
 @app.post("/generate_routine")
 async def generate_yoga_routine(level: str, goal: str, duration: int):
