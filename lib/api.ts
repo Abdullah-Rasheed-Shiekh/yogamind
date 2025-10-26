@@ -47,7 +47,7 @@ class ApiError extends Error {
 
 // Generic API request handler
 async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
-  const url = `${API_BASE_URL}${endpoint}`
+  const url = `${API_BASE_URL}`
 
   const response = await fetch(url, {
     headers: {
