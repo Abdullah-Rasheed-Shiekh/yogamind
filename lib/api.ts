@@ -33,7 +33,7 @@ export interface YogaPlanResponse {
 }
 
 // Base API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://yogamind-backend-1.onrender.com"
+const API_BASE_URL = "https://yogamind-backend-1.onrender.com"
 
 class ApiError extends Error {
   constructor(
